@@ -1,0 +1,51 @@
+---
+- name: Installation de docker et docker-compose sur un serveur Debian
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Mise à jour de la liste des paquets
+      apt:
+        update_cache: yes
+
+    - name: Installation des dependances pour Docker
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - gnupg
+
+    - name: Ajout de la cle GPG Docker
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        state: present
+
+    - name: Ajout du depot Docker
+      apt_repository:
+        repo: deb https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Installation de Docker
+      apt:
+        name: docker-ce,docker-ce-cli,containerd.io,docker-buildx-plugin,docker-compose-plugin
+        state: present
+
+    - name: Ajout de l'utilisateur au groupe Docker
+      user:
+        name: docker
+        groups: docker
+        append: yes
+
+    - name: Demarrage du service Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Installation de Docker-compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'

@@ -1,0 +1,17 @@
+---
+- name: Créer un utilisateur stagiaire1 et l'ajouter au groupe stage
+  hosts: stage-servers
+  become: true
+
+  tasks:
+    - name: Vérifier si le groupe stage existe, le créer si absent
+      ansible.builtin.group:
+        name: stage
+        state: present
+
+    - name: Créer l'utilisateur stagiaire
+      ansible.builtin.user:
+        name: stagiaire
+        groups: stage
+        state: present
+        shell: /bin/bash

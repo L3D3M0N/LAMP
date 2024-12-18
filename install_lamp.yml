@@ -1,0 +1,24 @@
+---
+- name: Install LAMP stack via Docker on Staging servers
+  hosts: staging
+  become: true
+  tasks:
+
+    - name: Ensure Docker is installed
+      package:
+        name: docker.io
+        state: present
+
+    - name: Pull the LAMP Docker image
+      docker_image:
+        name: tutum/lamp
+        source: pull
+
+    - name: Run LAMP container with port mapping
+      docker_container:
+        name: lamp_container
+        image: tutum/lamp
+        state: started
+        ports:
+          - "8080:80"
+        restart_policy: unless-stopped
