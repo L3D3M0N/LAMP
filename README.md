@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Ce document résume les activités et les sujets abordés dans le cadre des cours et travaux pratiques réalisés dans le cadre de la formation. Voici un aperçu des différents modules et actions effectués.
+Installation de Lamp via Ansible
 
 ---
 
 ## Contenu Principal
 
-### Modules abordés
+### Les applicatifs
 
 1. **Utilisateur**
    - **Description**: Création dun utilisateur stagière.
@@ -17,10 +17,10 @@ Ce document résume les activités et les sujets abordés dans le cadre des cour
    - **Description**: Installation de docker via un playbook.
    
 3. **LAMP**
-   - **Description**: Utilisation de Git pour la gestion de versions et la collaboration sur des projets de développement.
+   - **Description**: Installation de Lamp via docker grace à un playbook.
 
 6. **Git**
-   - **Description**: Intégration de Docker, Bash, et Git pour une gestion fluide du stockage et des environnements de développement.
+   - **Description**: .
 
 
 ---
